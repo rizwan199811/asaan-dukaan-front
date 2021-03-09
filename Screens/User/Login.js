@@ -11,8 +11,8 @@ import { loginUser } from "../../Context/actions/Auth.actions";
 
 const Login = (props) => {
   const context = useContext(AuthGlobal);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhoneNo] = useState("");
+  // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -23,13 +23,19 @@ const Login = (props) => {
 
   const handleSubmit = () => {
     const user = {
-      email,
-      password,
+      phone,
+      // password,
     };
 
-    if (email === "" || password === "") {
-      setError("Please fill in your credentials");
-    } else {
+    // if (email === "" || password === "") {
+    //   setError("Please fill in your credentials");
+    // } else {
+    //   loginUser(user, context.dispatch);
+    // }
+    if(phone === ""){
+      setError("Please fill your PhoneNo")
+    }
+    else{
       loginUser(user, context.dispatch);
     }
   };
@@ -37,20 +43,20 @@ const Login = (props) => {
   return (
     <FormContainer title={"Login"}>
       <Input
-        placeholder={"Enter Email"}
-        name={"email"}
-        id={"email"}
-        value={email}
-        onChangeText={(text) => setEmail(text.toLowerCase())}
+        placeholder={"Enter PhoneNo"}
+        name={"phone"}
+        id={"phone"}
+        value={phone}
+        onChangeText={(text) => setPhoneNo(text.toLowerCase())}
       />
-      <Input
+      {/* <Input
         placeholder={"Enter Password"}
         name={"password"}
         id={"password"}
         secureTextEntry={true}
         value={password}
         onChangeText={(text) => setPassword(text)}
-      />
+      /> */}
       <View style={styles.buttonGroup}>
         {error ? <Error message={error} /> : null}
         <EasyButton large primary onPress={() => handleSubmit()}>
